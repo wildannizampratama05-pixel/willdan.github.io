@@ -5,21 +5,80 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AUTO PRO - Spesialis Otomotif Premium</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
-        :root{--gold:#D4AF37;--gold-light:#F4D03F;--gold-dark:#B8941F;--dark:#0a0a0a;--card:rgba(20,20,20,0.95);--text:#f0f0f0;--muted:#888;--accent:#ff6b35;--success:#28a745;--blue:#3b82f6;--purple:#8b5cf6;--red:#ef4444}
+        :root{--gold:#D4AF37;--gold-light:#F4D03F;--gold-dark:#B8941F;--dark:#0a0a0a;--card:rgba(20,20,20,0.95);--text:#f0f0f0;--muted:#888;--accent:#ff6b35;--success:#28a745;--blue:#3b82f6;--purple:#8b5cf6;--red:#ef4444;--cyan:#06b6d4}
         body{font-family:'Poppins',sans-serif;background:var(--dark);color:var(--text);overflow-x:hidden}
         
-        /* Animated Background */
+        /* ===== FULL SCREEN LANDING PAGE ===== */
+        .landing-page{position:fixed;top:0;left:0;width:100%;height:100vh;z-index:9999;background:linear-gradient(135deg,#0a0a0a 0%,#1a1a2e 50%,#0a0a0a 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:all 1.2s cubic-bezier(0.4,0,0.2,1)}
+        .landing-page.hidden{opacity:0;pointer-events:none;transform:scale(1.1)}
+        .landing-page.hidden .landing-content{transform:translateY(-50px);opacity:0}
+        
+        .landing-content{text-align:center;z-index:10;transition:all 1s ease}
+        .landing-logo{width:120px;height:120px;background:linear-gradient(135deg,var(--gold) 0%,var(--gold-dark) 100%);border-radius:24px;display:flex;align-items:center;justify-content:center;font-size:50px;color:var(--dark);margin:0 auto 30px;box-shadow:0 0 60px rgba(212,175,55,0.5);animation:landPulse 2s infinite}
+        @keyframes landPulse{0%,100%{box-shadow:0 0 60px rgba(212,175,55,0.5);transform:scale(1)}50%{box-shadow:0 0 100px rgba(212,175,55,0.8);transform:scale(1.05)}}
+        .landing-content h1{font-family:'Orbitron',sans-serif;font-size:64px;font-weight:900;background:linear-gradient(135deg,var(--gold) 0%,#fff 50%,var(--gold) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:15px;letter-spacing:4px}
+        .landing-content p{font-size:20px;color:var(--muted);margin-bottom:40px;letter-spacing:2px;text-transform:uppercase}
+        .btn-enter{padding:18px 50px;background:linear-gradient(135deg,var(--gold) 0%,var(--gold-dark) 100%);border:none;border-radius:50px;color:var(--dark);font-size:18px;font-weight:800;cursor:pointer;transition:all .4s;text-transform:uppercase;letter-spacing:2px;display:flex;align-items:center;gap:12px;box-shadow:0 10px 40px rgba(212,175,55,0.3)}
+        .btn-enter:hover{transform:translateY(-5px);box-shadow:0 20px 60px rgba(212,175,55,0.5)}
+        .btn-enter i{font-size:20px;animation:arrowBounce 1s infinite}
+        @keyframes arrowBounce{0%,100%{transform:translateX(0)}50%{transform:translateX(8px)}}
+        
+        /* Animated Background for Landing */
+        .land-bg{position:absolute;top:0;left:0;width:100%;height:100%;overflow:hidden}
+        .land-bg .ring{position:absolute;border:2px solid rgba(212,175,55,0.1);border-radius:50%;animation:ringExpand 4s infinite}
+        @keyframes ringExpand{0%{width:0;height:0;opacity:1}100%{width:800px;height:800px;opacity:0}}
+        .land-bg .ring:nth-child(1){top:20%;left:30%;animation-delay:0s}
+        .land-bg .ring:nth-child(2){top:60%;left:70%;animation-delay:1.3s}
+        .land-bg .ring:nth-child(3){top:40%;left:50%;animation-delay:2.6s}
+        
+        /* Floating Car Parts */
+        .float-part{position:absolute;font-size:40px;color:rgba(212,175,55,0.15);animation:floatPart 8s infinite ease-in-out}
+        @keyframes floatPart{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-30px) rotate(10deg)}}
+        .float-part:nth-child(4){top:15%;left:10%;animation-delay:0s}
+        .float-part:nth-child(5){top:70%;left:85%;animation-delay:2s}
+        .float-part:nth-child(6){top:30%;left:80%;animation-delay:4s}
+        .float-part:nth-child(7){top:80%;left:15%;animation-delay:6s}
+        
+        /* ===== MAIN BACKGROUND ===== */
         .bg-fix{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;background:linear-gradient(135deg,#0a0a0a 0%,#1a1a2e 50%,#0a0a0a 100%)}
+        
+        /* Animated Grid Background */
+        .grid-bg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;opacity:0.03;background-image:linear-gradient(rgba(212,175,55,0.3) 1px,transparent 1px),linear-gradient(90deg,rgba(212,175,55,0.3) 1px,transparent 1px);background-size:50px 50px;animation:gridMove 20s linear infinite}
+        @keyframes gridMove{0%{transform:perspective(500px) rotateX(60deg) translateY(0)}100%{transform:perspective(500px) rotateX(60deg) translateY(50px)}}
+        
+        /* Particles */
         .particles{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;overflow:hidden}
         .particle{position:absolute;width:3px;height:3px;background:var(--gold);border-radius:50%;opacity:0;animation:float 12s infinite}
-        @keyframes float{0%{opacity:0;transform:translateY(100vh)}10%{opacity:.5}90%{opacity:.5}100%{opacity:0;transform:translateY(-100vh)}}
-        .vignette{position:fixed;top:0;left:0;width:100%;height:100%;box-shadow:inset 0 0 120px rgba(0,0,0,0.8);pointer-events:none;z-index:9998}
+        @keyframes float{0%{opacity:0;transform:translateY(100vh) scale(0)}10%{opacity:.6;transform:scale(1)}90%{opacity:.6}100%{opacity:0;transform:translateY(-100vh) scale(0)}}
         
-        /* Header */
-        header{background:linear-gradient(135deg,rgba(10,10,10,0.98) 0%,rgba(30,30,30,0.98) 100%);border-bottom:2px solid var(--gold);position:sticky;top:0;z-index:1000;padding:15px 0;box-shadow:0 5px 30px rgba(212,175,55,0.2)}
+        /* Speed Lines */
+        .speed-lines{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9998;overflow:hidden;opacity:0.05}
+        .speed-line{position:absolute;width:2px;height:100px;background:linear-gradient(to bottom,transparent,var(--gold),transparent);animation:speedMove 3s infinite linear}
+        @keyframes speedMove{0%{transform:translateY(-100px)}100%{transform:translateY(100vh)}}
+        
+        .vignette{position:fixed;top:0;left:0;width:100%;height:100%;box-shadow:inset 0 0 150px rgba(0,0,0,0.9);pointer-events:none;z-index:9997}
+        
+        /* ===== SLIDE ANIMATIONS ===== */
+        .slide-in{opacity:0;transform:translateY(60px);transition:all 0.8s cubic-bezier(0.4,0,0.2,1)}
+        .slide-in.visible{opacity:1;transform:translateY(0)}
+        .slide-left{opacity:0;transform:translateX(-60px);transition:all 0.8s cubic-bezier(0.4,0,0.2,1)}
+        .slide-left.visible{opacity:1;transform:translateX(0)}
+        .slide-right{opacity:0;transform:translateX(60px);transition:all 0.8s cubic-bezier(0.4,0,0.2,1)}
+        .slide-right.visible{opacity:1;transform:translateX(0)}
+        .scale-in{opacity:0;transform:scale(0.8);transition:all 0.8s cubic-bezier(0.4,0,0.2,1)}
+        .scale-in.visible{opacity:1;transform:scale(1)}
+        
+        .delay-1{transition-delay:0.1s}
+        .delay-2{transition-delay:0.2s}
+        .delay-3{transition-delay:0.3s}
+        .delay-4{transition-delay:0.4s}
+        .delay-5{transition-delay:0.5s}
+        
+        /* ===== HEADER ===== */
+        header{background:linear-gradient(135deg,rgba(10,10,10,0.98) 0%,rgba(30,30,30,0.98) 100%);border-bottom:2px solid var(--gold);position:sticky;top:0;z-index:1000;padding:15px 0;box-shadow:0 5px 30px rgba(212,175,55,0.2);backdrop-filter:blur(10px)}
         .header-container{max-width:1400px;margin:0 auto;padding:0 30px;display:flex;justify-content:space-between;align-items:center}
         .logo{display:flex;align-items:center;gap:15px;cursor:pointer}
         .logo-icon{width:55px;height:55px;background:linear-gradient(135deg,var(--gold) 0%,var(--gold-dark) 100%);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;color:var(--dark);box-shadow:0 0 20px rgba(212,175,55,0.4);animation:pulse 2s infinite}
@@ -39,8 +98,8 @@
         .badge{position:absolute;top:0;right:0;background:var(--accent);color:white;font-size:10px;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold;animation:badgePop 0.3s ease}
         @keyframes badgePop{0%{transform:scale(0)}50%{transform:scale(1.3)}100%{transform:scale(1)}}
         
-        /* Hero */
-        .hero{padding:80px 30px;text-align:center;position:relative;overflow:hidden}
+        /* ===== HERO ===== */
+        .hero{padding:80px 30px;text-align:center;position:relative;overflow:hidden;min-height:500px;display:flex;flex-direction:column;align-items:center;justify-content:center}
         .hero::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(212,175,55,0.08) 0%,transparent 70%);animation:rotate 20s linear infinite}
         @keyframes rotate{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
         .hero h2{font-size:52px;font-weight:800;background:linear-gradient(135deg,var(--gold) 0%,#fff 50%,var(--gold) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:15px;position:relative;z-index:1}
@@ -51,33 +110,26 @@
         .stat-number{font-size:32px;font-weight:800;color:var(--gold);display:block}
         .stat-label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:2px}
         
-        /* Products */
+        /* ===== PRODUCTS ===== */
         .section{max-width:1400px;margin:0 auto;padding:60px 30px}
         .section-title{text-align:center;margin-bottom:50px}
         .section-title h3{font-size:32px;color:var(--gold);margin-bottom:10px;position:relative;display:inline-block}
         .section-title h3::after{content:'';position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);width:50px;height:3px;background:var(--gold)}
         .section-title p{color:var(--muted);margin-top:20px}
         
-        /* Filter Tags */
         .filter-tags{display:flex;justify-content:center;gap:10px;margin-bottom:30px;flex-wrap:wrap}
         .filter-tag{padding:8px 20px;background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.3);border-radius:25px;color:var(--text);cursor:pointer;transition:all .3s;font-size:13px;font-weight:500}
         .filter-tag:hover,.filter-tag.active{background:var(--gold);color:var(--dark);border-color:var(--gold);transform:scale(1.05)}
         
-        .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:30px}
+        .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:30px}
         
-        /* Product Card Variations */
+        /* Product Card */
         .product-card{background:var(--card);border:1px solid rgba(212,175,55,0.2);border-radius:20px;overflow:hidden;transition:all .4s;position:relative;display:flex;flex-direction:column}
         .product-card:hover{transform:translateY(-12px);border-color:var(--gold);box-shadow:0 20px 40px rgba(212,175,55,0.25)}
         
-        /* Card Type A - Featured */
         .product-card.type-a{border-top:4px solid var(--gold)}
         .product-card.type-a .product-image{height:240px}
-        
-        /* Card Type B - Compact */
         .product-card.type-b .product-image{height:200px}
-        .product-card.type-b .product-info{padding:18px}
-        
-        /* Card Type C - Premium */
         .product-card.type-c{border:2px solid rgba(212,175,55,0.3)}
         .product-card.type-c:hover{border-color:var(--gold)}
         .product-card.type-c .product-image{height:220px}
@@ -86,7 +138,7 @@
         .product-card:hover .product-image{transform:scale(1.05)}
         .product-info{padding:22px;flex:1;display:flex;flex-direction:column}
         
-        /* Badges & Tags */
+        /* Badges */
         .card-badges{position:absolute;top:12px;left:12px;display:flex;flex-direction:column;gap:6px;z-index:2}
         .card-badge{padding:4px 12px;border-radius:20px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px}
         .badge-best{background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--dark)}
@@ -96,6 +148,12 @@
         
         .product-name{font-size:18px;font-weight:700;margin-bottom:6px}
         .product-desc{font-size:12px;color:var(--muted);margin-bottom:10px;line-height:1.6}
+        
+        /* Car Compatibility */
+        .car-compat{background:rgba(212,175,55,0.08);border:1px solid rgba(212,175,55,0.2);border-radius:10px;padding:10px;margin-bottom:10px}
+        .car-compat-title{font-size:11px;color:var(--gold);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;display:flex;align-items:center;gap:5px}
+        .car-compat-list{font-size:11px;color:var(--muted);line-height:1.8}
+        .car-compat-list span{display:inline-block;background:rgba(212,175,55,0.1);padding:2px 8px;border-radius:12px;margin:2px;border:1px solid rgba(212,175,55,0.2);color:var(--text);font-size:10px}
         
         /* Rating */
         .product-rating{display:flex;align-items:center;gap:5px;margin-bottom:8px;font-size:12px}
@@ -109,7 +167,6 @@
         
         .product-price{font-size:22px;font-weight:800;color:var(--gold);margin-bottom:5px}
         .product-price .old-price{font-size:14px;color:var(--muted);text-decoration:line-through;margin-left:8px;font-weight:400}
-        .product-price .discount-badge{background:var(--red);color:white;font-size:10px;padding:2px 6px;border-radius:4px;margin-left:5px;vertical-align:middle}
         
         .max-info{font-size:11px;color:var(--muted);margin-bottom:12px;font-style:italic;display:flex;align-items:center;gap:5px}
         .quantity-control{display:flex;align-items:center;gap:12px;margin-bottom:15px;justify-content:center}
@@ -120,7 +177,7 @@
         .btn-add-cart:hover{transform:scale(1.02);box-shadow:0 8px 25px rgba(212,175,55,0.4)}
         .btn-add-cart:active{transform:scale(0.98)}
         
-        /* Sidebars */
+        /* ===== SIDEBARS ===== */
         .sidebar{position:fixed;top:0;right:-420px;width:420px;height:100vh;background:linear-gradient(180deg,#0f0f0f 0%,#1a1a1a 100%);border-left:2px solid var(--gold);z-index:2000;transition:right .4s;overflow-y:auto;padding:25px}
         .sidebar.active{right:0}
         .sidebar-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px;padding-bottom:15px;border-bottom:1px solid rgba(212,175,55,0.3)}
@@ -144,7 +201,7 @@
         .btn-checkout{width:100%;padding:15px;background:linear-gradient(135deg,var(--gold) 0%,var(--gold-dark) 100%);border:none;border-radius:10px;color:var(--dark);font-size:16px;font-weight:800;cursor:pointer;margin-top:15px;text-transform:uppercase;transition:all .3s}
         .btn-checkout:hover{transform:scale(1.02);box-shadow:0 8px 25px rgba(212,175,55,0.4)}
         
-        /* History */
+        /* ===== HISTORY ===== */
         .delete-all{width:100%;padding:10px;background:rgba(255,107,53,0.1);border:2px solid var(--accent);border-radius:8px;color:var(--accent);font-size:13px;font-weight:700;cursor:pointer;margin-bottom:15px;text-transform:uppercase;transition:all .3s}
         .delete-all:hover{background:var(--accent);color:white}
         .history-item{background:rgba(255,255,255,0.03);border:1px solid rgba(212,175,55,0.1);border-radius:12px;padding:15px;margin-bottom:12px;position:relative;transition:all .3s}
@@ -157,7 +214,7 @@
         .del-btn{position:absolute;top:15px;right:15px;background:none;border:none;color:var(--accent);cursor:pointer;font-size:16px;transition:all .3s}
         .del-btn:hover{transform:scale(1.2);color:#ff4444}
         
-        /* Modal */
+        /* ===== MODALS ===== */
         .modal-bg{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:3000;display:none;align-items:center;justify-content:center;backdrop-filter:blur(5px)}
         .modal-bg.active{display:flex}
         .modal-content{background:linear-gradient(135deg,#111 0%,#1a1a1a 100%);border:2px solid var(--gold);border-radius:20px;padding:30px;max-width:550px;width:90%;max-height:90vh;overflow-y:auto;position:relative;animation:modalSlide 0.4s ease}
@@ -199,38 +256,54 @@
         .btn-ty{margin-top:20px;padding:12px 30px;background:linear-gradient(135deg,var(--gold) 0%,var(--gold-dark) 100%);border:none;border-radius:10px;color:var(--dark);font-size:15px;font-weight:700;cursor:pointer;transition:all .3s}
         .btn-ty:hover{transform:scale(1.05)}
         
-        /* Visitor Modal */
+        /* ===== VISITOR MODAL ===== */
         .visitor-bg{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:3000;display:none;align-items:center;justify-content:center;backdrop-filter:blur(5px)}
         .visitor-bg.active{display:flex}
-        .visitor-box{background:linear-gradient(135deg,#111 0%,#1a1a1a 100%);border:2px solid var(--gold);border-radius:20px;padding:30px;max-width:600px;width:90%;max-height:80vh;overflow-y:auto;animation:modalSlide 0.4s ease}
-        .visitor-box h2{color:var(--gold);margin-bottom:20px;text-align:center}
+        .visitor-box{background:linear-gradient(135deg,#111 0%,#1a1a1a 100%);border:2px solid var(--gold);border-radius:20px;padding:30px;max-width:700px;width:90%;max-height:85vh;overflow-y:auto;animation:modalSlide 0.4s ease}
+        .visitor-box h2{color:var(--gold);margin-bottom:20px;text-align:center;font-size:24px}
         .v-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-bottom:20px}
         .v-stat{background:rgba(212,175,55,0.05);border:1px solid rgba(212,175,55,0.2);border-radius:12px;padding:15px;text-align:center;transition:all .3s}
         .v-stat:hover{transform:translateY(-3px);border-color:var(--gold)}
         .v-stat-num{font-size:28px;font-weight:800;color:var(--gold)}
         .v-stat-label{font-size:11px;color:var(--muted);text-transform:uppercase;margin-top:5px}
-        .v-list{max-height:250px;overflow-y:auto}
-        .v-item{display:flex;justify-content:space-between;padding:10px;border-bottom:1px solid rgba(255,255,255,0.05);font-size:13px;transition:all .2s}
-        .v-item:hover{background:rgba(212,175,55,0.05)}
-        .v-item span:first-child{color:var(--muted)}
-        .v-item span:last-child{color:var(--gold)}
         
-        /* Overlay */
+        .visitor-actions{display:flex;gap:10px;margin-bottom:15px}
+        .visitor-actions button{flex:1;padding:10px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;transition:all .3s;text-transform:uppercase}
+        .btn-clear-all{background:rgba(239,68,68,0.1);border:2px solid var(--red);color:var(--red)}
+        .btn-clear-all:hover{background:var(--red);color:white}
+        .btn-refresh{background:rgba(40,167,69,0.1);border:2px solid var(--success);color:var(--success)}
+        .btn-refresh:hover{background:var(--success);color:white}
+        
+        .v-list{max-height:300px;overflow-y:auto;border:1px solid rgba(212,175,55,0.1);border-radius:10px;padding:10px}
+        .v-item{display:flex;justify-content:space-between;align-items:center;padding:10px;border-bottom:1px solid rgba(255,255,255,0.05);font-size:13px;transition:all .2s}
+        .v-item:hover{background:rgba(212,175,55,0.05)}
+        .v-item-info{display:flex;flex-direction:column;gap:3px}
+        .v-item-time{color:var(--gold);font-weight:600;font-size:12px}
+        .v-item-detail{color:var(--muted);font-size:11px}
+        .v-item-status{padding:3px 8px;border-radius:12px;font-size:10px;font-weight:700}
+        .status-online{background:rgba(40,167,69,0.2);color:var(--success);border:1px solid rgba(40,167,69,0.3)}
+        .status-offline{background:rgba(136,136,136,0.2);color:var(--muted);border:1px solid rgba(136,136,136,0.3)}
+        .v-del-btn{background:none;border:none;color:var(--accent);cursor:pointer;font-size:14px;transition:all .3s;padding:5px;margin-left:10px}
+        .v-del-btn:hover{transform:scale(1.2);color:#ff4444}
+        
+        .v-empty{text-align:center;padding:30px;color:var(--muted)}
+        .v-empty i{font-size:40px;margin-bottom:10px;color:var(--gold)}
+        
+        /* ===== OVERLAY & NOTIF ===== */
         .overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:1500;display:none;backdrop-filter:blur(3px)}
         .overlay.active{display:block}
         
-        /* Notification */
         .notif{position:fixed;top:90px;right:20px;background:linear-gradient(135deg,var(--gold) 0%,var(--gold-dark) 100%);color:var(--dark);padding:12px 20px;border-radius:10px;font-weight:700;z-index:4000;transform:translateX(400px);transition:transform .4s;box-shadow:0 5px 20px rgba(212,175,55,0.4)}
         .notif.show{transform:translateX(0)}
         .notif.error{background:linear-gradient(135deg,var(--accent),#ff8c5a)}
         
-        /* Chat */
+        /* ===== CHAT ===== */
         .chat-fix{position:fixed;bottom:25px;right:25px;z-index:1500}
         .chat-btn{width:55px;height:55px;background:linear-gradient(135deg,#25D366 0%,#128C7E 100%);border:none;border-radius:50%;color:white;font-size:24px;cursor:pointer;box-shadow:0 5px 20px rgba(37,211,102,0.4);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:all .3s;animation:chatPulse 2s infinite}
         .chat-btn:hover{transform:scale(1.1)}
         @keyframes chatPulse{0%,100%{box-shadow:0 5px 20px rgba(37,211,102,0.4)}50%{box-shadow:0 5px 30px rgba(37,211,102,0.7)}}
         
-        /* Footer */
+        /* ===== FOOTER ===== */
         footer{background:linear-gradient(135deg,#0a0a0a 0%,#111 100%);border-top:2px solid var(--gold);padding:50px 30px 25px;margin-top:80px}
         .footer-content{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:30px}
         .footer-section h4{color:var(--gold);font-size:16px;margin-bottom:15px}
@@ -238,12 +311,13 @@
         .footer-section a:hover{color:var(--gold);padding-left:5px}
         .footer-bottom{text-align:center;margin-top:30px;padding-top:15px;border-top:1px solid rgba(212,175,55,0.2);color:var(--muted);font-size:13px}
         
-        /* Empty */
+        /* ===== EMPTY ===== */
         .empty{text-align:center;padding:30px;color:var(--muted)}
         .empty i{font-size:40px;margin-bottom:10px;color:var(--gold)}
         
-        /* Responsive */
+        /* ===== RESPONSIVE ===== */
         @media(max-width:768px){
+            .landing-content h1{font-size:36px}
             .header-container{flex-direction:column;gap:15px}
             nav ul{flex-wrap:wrap;justify-content:center;gap:15px}
             .hero h2{font-size:36px}
@@ -255,15 +329,46 @@
             .hero-stats{flex-direction:column;gap:15px}
             .filter-tags{gap:8px}
             .filter-tag{font-size:12px;padding:6px 14px}
+            .visitor-actions{flex-direction:column}
         }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar{width:8px}
+        ::-webkit-scrollbar-track{background:var(--dark)}
+        ::-webkit-scrollbar-thumb{background:var(--gold-dark);border-radius:4px}
+        ::-webkit-scrollbar-thumb:hover{background:var(--gold)}
     </style>
 </head>
 <body>
+    <!-- ===== LANDING PAGE ===== -->
+    <div class="landing-page" id="landingPage">
+        <div class="land-bg">
+            <div class="ring"></div>
+            <div class="ring"></div>
+            <div class="ring"></div>
+            <div class="float-part"><i class="fas fa-cog"></i></div>
+            <div class="float-part"><i class="fas fa-wrench"></i></div>
+            <div class="float-part"><i class="fas fa-car"></i></div>
+            <div class="float-part"><i class="fas fa-oil-can"></i></div>
+        </div>
+        <div class="landing-content">
+            <div class="landing-logo"><i class="fas fa-car"></i></div>
+            <h1>AUTO PRO</h1>
+            <p>Spesialis Otomotif Premium</p>
+            <button class="btn-enter" onclick="enterSite()">
+                MASUK KE WEBSITE <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- ===== BACKGROUND ===== -->
     <div class="bg-fix"></div>
+    <div class="grid-bg"></div>
     <div class="particles" id="particles"></div>
+    <div class="speed-lines" id="speedLines"></div>
     <div class="vignette"></div>
 
-    <!-- Header -->
+    <!-- ===== HEADER ===== -->
     <header>
         <div class="header-container">
             <div class="logo" onclick="showVisitor()">
@@ -275,38 +380,38 @@
             </div>
             <nav>
                 <ul>
-                    <li><a href="#home">Beranda</a></li>
-                    <li><a href="#products">Produk</a></li>
-                    <li><a href="#about">Tentang</a></li>
-                    <li><a href="#contact">Kontak</a></li>
+                    <li><a href="#home" onclick="smoothScroll('home')">Beranda</a></li>
+                    <li><a href="#products" onclick="smoothScroll('products')">Produk</a></li>
+                    <li><a href="#about" onclick="smoothScroll('about')">Tentang</a></li>
+                    <li><a href="#contact" onclick="smoothScroll('contact')">Kontak</a></li>
                 </ul>
             </nav>
             <div class="nav-icons">
-                <button class="icon-btn" onclick="toggleCart()"><i class="fas fa-shopping-cart"></i><span class="badge" id="cartBadge">0</span></button>
-                <button class="icon-btn" onclick="toggleHistory()"><i class="fas fa-history"></i></button>
-                <button class="icon-btn" onclick="showVisitor()"><i class="fas fa-users"></i></button>
+                <button class="icon-btn" onclick="toggleCart()" title="Keranjang"><i class="fas fa-shopping-cart"></i><span class="badge" id="cartBadge">0</span></button>
+                <button class="icon-btn" onclick="toggleHistory()" title="Riwayat"><i class="fas fa-history"></i></button>
+                <button class="icon-btn" onclick="showVisitor()" title="Pengunjung"><i class="fas fa-users"></i><span class="badge" id="visitorBadge" style="display:none">0</span></button>
             </div>
         </div>
     </header>
 
-    <!-- Hero -->
-    <section class="hero" id="home">
+    <!-- ===== HERO ===== -->
+    <section class="hero slide-in" id="home">
         <h2>AUTO PRO</h2>
         <p>Spesialis Suku Cadang Otomotif Premium untuk Kendaraan Anda</p>
         <div class="hero-stats">
-            <div class="stat"><span class="stat-number">8+</span><span class="stat-label">Produk</span></div>
-            <div class="stat"><span class="stat-number">100%</span><span class="stat-label">Original</span></div>
-            <div class="stat"><span class="stat-number">24/7</span><span class="stat-label">Layanan</span></div>
+            <div class="stat scale-in delay-1"><span class="stat-number">10+</span><span class="stat-label">Produk</span></div>
+            <div class="stat scale-in delay-2"><span class="stat-number">100%</span><span class="stat-label">Original</span></div>
+            <div class="stat scale-in delay-3"><span class="stat-number">24/7</span><span class="stat-label">Layanan</span></div>
         </div>
     </section>
 
-    <!-- Products -->
+    <!-- ===== PRODUCTS ===== -->
     <section class="section" id="products">
-        <div class="section-title">
+        <div class="section-title slide-in">
             <h3>Produk Unggulan</h3>
             <p>Pilih suku cadang berkualitas untuk kendaraan Anda</p>
         </div>
-        <div class="filter-tags">
+        <div class="filter-tags slide-in">
             <div class="filter-tag active" onclick="filterProducts('all',this)">Semua</div>
             <div class="filter-tag" onclick="filterProducts('fluid',this)">Fluida</div>
             <div class="filter-tag" onclick="filterProducts('brake',this)">Rem</div>
@@ -316,30 +421,30 @@
         <div class="products-grid" id="productsGrid"></div>
     </section>
 
-    <!-- About -->
+    <!-- ===== ABOUT ===== -->
     <section class="section" id="about">
-        <div class="section-title">
+        <div class="section-title slide-in">
             <h3>Tentang Kami</h3>
             <p>AUTO PRO - Mitra Terpercaya</p>
         </div>
-        <div style="max-width:700px;margin:0 auto;text-align:center;color:var(--muted);line-height:2">
-            <p>Kami menyediakan suku cadang otomotif berkualitas premium. Setiap produk telah melalui uji kualitas ketat.</p>
+        <div class="slide-in" style="max-width:700px;margin:0 auto;text-align:center;color:var(--muted);line-height:2">
+            <p>Kami menyediakan suku cadang otomotif berkualitas premium. Setiap produk telah melalui uji kualitas ketat dan kompatibel dengan berbagai merek mobil populer di Indonesia.</p>
             <div style="margin-top:25px;padding:20px;background:rgba(212,175,55,0.05);border:2px solid var(--gold);border-radius:15px">
                 <i class="fas fa-store" style="font-size:32px;color:var(--gold);margin-bottom:10px"></i>
                 <h4 style="color:var(--gold);margin-bottom:8px">Pengambilan di Toko</h4>
                 <p style="color:var(--text);font-weight:600;font-size:14px">Pembeli WAJIB mengambil barang langsung di toko kami. Tidak ada layanan pengiriman.</p>
-                <p style="margin-top:8px;font-size:12px">Tanggul Jember Jawa Timur Indosenia | 08:00 - 20:00 WIB</p>
+                <p style="margin-top:8px;font-size:12px">Tanggul Jember Jawa Timur Indonesia | 08:00 - 20:00 WIB</p>
             </div>
         </div>
     </section>
 
-    <!-- Contact -->
+    <!-- ===== CONTACT ===== -->
     <section class="section" id="contact">
-        <div class="section-title">
+        <div class="section-title slide-in">
             <h3>Hubungi Kami</h3>
             <p>Chat admin untuk info lebih lanjut</p>
         </div>
-        <div style="text-align:center;max-width:500px;margin:0 auto">
+        <div class="slide-in" style="text-align:center;max-width:500px;margin:0 auto">
             <div style="background:var(--card);border:1px solid rgba(212,175,55,0.2);border-radius:15px;padding:30px;transition:all .3s" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='rgba(212,175,55,0.2)'">
                 <i class="fab fa-whatsapp" style="font-size:40px;color:#25D366;margin-bottom:15px"></i>
                 <h4 style="color:var(--gold);margin-bottom:8px">WhatsApp</h4>
@@ -348,7 +453,7 @@
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- ===== FOOTER ===== -->
     <footer>
         <div class="footer-content">
             <div class="footer-section">
@@ -379,7 +484,7 @@
         </div>
     </footer>
 
-    <!-- Cart Sidebar -->
+    <!-- ===== CART SIDEBAR ===== -->
     <div class="sidebar" id="cartSidebar">
         <div class="sidebar-header">
             <h3><i class="fas fa-shopping-cart"></i> Keranjang</h3>
@@ -393,17 +498,17 @@
         </div>
     </div>
 
-    <!-- History Sidebar -->
+    <!-- ===== HISTORY SIDEBAR ===== -->
     <div class="sidebar" id="historySidebar">
         <div class="sidebar-header">
-            <h3><i class="fas fa-history"></i> Riwayat</h3>
+            <h3><i class="fas fa-history"></i> Riwayat Pemesanan</h3>
             <button class="close-btn" onclick="toggleHistory()"><i class="fas fa-times"></i></button>
         </div>
-        <button class="delete-all" id="deleteAllBtn" onclick="deleteAllHistory()" style="display:none"><i class="fas fa-trash-alt"></i> Hapus Semua</button>
+        <button class="delete-all" id="deleteAllBtn" onclick="deleteAllHistory()" style="display:none"><i class="fas fa-trash-alt"></i> Hapus Semua Riwayat</button>
         <div id="historyItems"><div class="empty"><i class="fas fa-clipboard-list"></i><p>Belum ada riwayat</p></div></div>
     </div>
 
-    <!-- Order Modal -->
+    <!-- ===== ORDER MODAL ===== -->
     <div class="modal-bg" id="orderModal">
         <div class="modal-content">
             <h2><i class="fas fa-file-alt"></i> Formulir Pemesanan</h2>
@@ -411,7 +516,7 @@
                 <div class="form-group"><label>Nama Lengkap</label><input type="text" id="cName" required placeholder="Nama lengkap"></div>
                 <div class="form-group"><label>Nomor WhatsApp</label><input type="tel" id="cPhone" required placeholder="08123456789" pattern="[0-9]+"></div>
                 <div class="form-group"><label>Jenis Mobil</label><input type="text" id="cCar" required placeholder="Toyota Avanza G 2015"></div>
-                <div class="form-group"><label>Tanggal</label><input type="date" id="cDate" required></div>
+                <div class="form-group"><label>Tanggal Pengambilan</label><input type="date" id="cDate" required></div>
                 <div class="form-group"><label>Waktu/Jam</label><input type="time" id="cTime" required></div>
                 
                 <div class="pickup-info">
@@ -420,15 +525,15 @@
                 </div>
                 
                 <div class="order-sum">
-                    <h4><i class="fas fa-list"></i> Ringkasan</h4>
+                    <h4><i class="fas fa-list"></i> Ringkasan Pesanan</h4>
                     <div id="orderSumItems"></div>
                     <div class="sum-total"><span>Total:</span><span id="orderSumTotal">Rp 0</span></div>
                 </div>
                 
                 <div class="form-group">
-                    <label>Pembayaran</label>
+                    <label>Metode Pembayaran</label>
                     <div class="pay-options">
-                        <div class="pay-option" onclick="selectPay('transfer')"><i class="fas fa-university"></i><span>Transfer</span></div>
+                        <div class="pay-option" onclick="selectPay('transfer')"><i class="fas fa-university"></i><span>Transfer Bank</span></div>
                         <div class="pay-option" onclick="selectPay('dana')"><i class="fas fa-wallet"></i><span>DANA</span></div>
                         <div class="pay-option" onclick="selectPay('cash')"><i class="fas fa-money-bill-wave"></i><span>Cash</span></div>
                     </div>
@@ -440,7 +545,7 @@
         </div>
     </div>
 
-    <!-- Thank You -->
+    <!-- ===== THANK YOU ===== -->
     <div class="ty-bg" id="tyModal">
         <div class="ty-box">
             <i class="fas fa-check-circle"></i>
@@ -453,16 +558,29 @@
         </div>
     </div>
 
-    <!-- Visitor Modal -->
+    <!-- ===== VISITOR MODAL ===== -->
     <div class="visitor-bg" id="visitorModal">
         <div class="visitor-box">
-            <h2><i class="fas fa-users"></i> Pengunjung</h2>
+            <h2><i class="fas fa-users"></i> Riwayat Pengunjung</h2>
             <div class="v-stats">
-                <div class="v-stat"><div class="v-stat-num" id="vCount">0</div><div class="v-stat-label">Total</div></div>
-                <div class="v-stat"><div class="v-stat-num" id="vToday">0</div><div class="v-stat-label">Hari Ini</div></div>
-                <div class="v-stat"><div class="v-stat-num" id="vOnline">1</div><div class="v-stat-label">Online</div></div>
+                <div class="v-stat">
+                    <div class="v-stat-num" id="vCount">0</div>
+                    <div class="v-stat-label">Total Kunjungan</div>
+                </div>
+                <div class="v-stat">
+                    <div class="v-stat-num" id="vToday">0</div>
+                    <div class="v-stat-label">Hari Ini</div>
+                </div>
+                <div class="v-stat">
+                    <div class="v-stat-num" id="vOnline">0</div>
+                    <div class="v-stat-label">Sedang Online</div>
+                </div>
             </div>
-            <h4 style="color:var(--gold);margin-bottom:10px;font-size:14px">Riwayat Kunjungan</h4>
+            <div class="visitor-actions">
+                <button class="btn-clear-all" onclick="clearAllVisitors()"><i class="fas fa-trash"></i> Hapus Semua</button>
+                <button class="btn-refresh" onclick="refreshVisitors()"><i class="fas fa-sync-alt"></i> Refresh</button>
+            </div>
+            <h4 style="color:var(--gold);margin-bottom:10px;font-size:14px"><i class="fas fa-list"></i> Daftar Pengunjung</h4>
             <div class="v-list" id="vList"></div>
             <button class="btn-confirm" onclick="closeVisitor()" style="margin-top:15px">Tutup</button>
         </div>
@@ -476,8 +594,8 @@
     </div>
 
     <script>
-        // Data Produk dengan gambar yang BENAR-BENAR sesuai nama produk
-        // Menggunakan gambar produk otomotif asli dari brand ternama
+        
+        // ===== DATA PRODUK DENGAN KOMPATIBILITAS MOBIL =====
         const products=[
             {
                 id:1,
@@ -485,7 +603,6 @@
                 desc:"Cairan pendingin radiator premium Prestone, melindungi mesin dari overheat dan korosi. Formula khusus untuk iklim tropis Indonesia.",
                 price:85000,
                 oldPrice:95000,
-                // Gambar: Botol coolant Prestone hijau/kuning - BENAR sesuai produk
                 image:"https://i0.wp.com/prestone.com.ph/wp-content/uploads/2023/08/Coolant-RTU-1L_300x493px_UPDATED.png?fit=300%2C493&ssl=1",
                 stock:45,
                 maxQty:10,
@@ -493,7 +610,17 @@
                 badge:"popular",
                 rating:4.8,
                 reviews:128,
-                cardType:"type-a"
+                cardType:"type-a",
+                cars:[
+                    {model:"Toyota Avanza",years:"2004-2023"},
+                    {model:"Toyota Innova",years:"2004-2023"},
+                    {model:"Honda Jazz",years:"2004-2020"},
+                    {model:"Honda Brio",years:"2012-2023"},
+                    {model:"Daihatsu Xenia",years:"2004-2023"},
+                    {model:"Suzuki Ertiga",years:"2012-2023"},
+                    {model:"Mitsubishi Xpander",years:"2017-2023"},
+                    {model:"Nissan Livina",years:"2007-2019"}
+                ]
             },
             {
                 id:2,
@@ -501,7 +628,6 @@
                 desc:"Oli mesin full synthetic Mobil 1 5W-30 dengan teknologi Triple Action Power. Performa maksimal & perlindungan mesin terbaik.",
                 price:275000,
                 oldPrice:310000,
-                // Gambar: Botol oli Mobil 1 5W-30 - BENAR sesuai produk
                 image:"https://www.mobilub.com/wp-content/uploads/2018/10/M1-5W30.jpg",
                 stock:32,
                 maxQty:10,
@@ -509,7 +635,17 @@
                 badge:"best",
                 rating:4.9,
                 reviews:256,
-                cardType:"type-c"
+                cardType:"type-c",
+                cars:[
+                    {model:"Toyota Camry",years:"2006-2023"},
+                    {model:"Toyota Corolla Altis",years:"2008-2020"},
+                    {model:"Honda Civic",years:"2006-2021"},
+                    {model:"Honda CR-V",years:"2007-2022"},
+                    {model:"Mazda 3",years:"2014-2023"},
+                    {model:"Mazda CX-5",years:"2012-2023"},
+                    {model:"Hyundai Tucson",years:"2010-2023"},
+                    {model:"Kia Sportage",years:"2011-2023"}
+                ]
             },
             {
                 id:3,
@@ -517,7 +653,6 @@
                 desc:"Minyak rem Prestone DOT 4 berkualitas tinggi dengan titik didih tinggi. Keselamatan pengereman optimal di segala kondisi.",
                 price:45000,
                 oldPrice:55000,
-                // Gambar: Botol Prestone DOT 4 Brake Fluid kuning - BENAR sesuai produk
                 image:"https://www.prestoneuk.com/wp-content/uploads/2024/07/AS800H-6_Prestone-DOT-4-Brake-Fluid-355ml_WEB.png",
                 stock:78,
                 maxQty:10,
@@ -525,7 +660,17 @@
                 badge:"new",
                 rating:4.6,
                 reviews:89,
-                cardType:"type-b"
+                cardType:"type-b",
+                cars:[
+                    {model:"Toyota Fortuner",years:"2005-2023"},
+                    {model:"Toyota Hilux",years:"2004-2023"},
+                    {model:"Isuzu D-Max",years:"2002-2023"},
+                    {model:"Mitsubishi Triton",years:"2006-2023"},
+                    {model:"Nissan Navara",years:"2008-2023"},
+                    {model:"Ford Ranger",years:"2011-2023"},
+                    {model:"Chevrolet Colorado",years:"2012-2020"},
+                    {model:"Mazda BT-50",years:"2006-2020"}
+                ]
             },
             {
                 id:4,
@@ -533,7 +678,6 @@
                 desc:"Kampas rem depan Brembo Prime premium dengan daya cengkeram tinggi. Tahan lama & aman untuk berkendara harian.",
                 price:185000,
                 oldPrice:210000,
-                // Gambar: Kampas rem depan Brembo - BENAR sesuai produk
                 image:"https://www.brembostore.com/cdn/shop/files/PRIME_Low-Met_Front_Disc_Brake_Pad_Set_-_P06017_01.jpg?v=1777201869&width=2048",
                 stock:15,
                 maxQty:8,
@@ -541,7 +685,17 @@
                 badge:"sale",
                 rating:4.7,
                 reviews:167,
-                cardType:"type-a"
+                cardType:"type-a",
+                cars:[
+                    {model:"Toyota Avanza",years:"2012-2023"},
+                    {model:"Toyota Rush",years:"2006-2023"},
+                    {model:"Daihatsu Terios",years:"2006-2023"},
+                    {model:"Daihatsu Xenia",years:"2012-2023"},
+                    {model:"Suzuki APV",years:"2004-2019"},
+                    {model:"Honda Mobilio",years:"2014-2021"},
+                    {model:"Honda BR-V",years:"2016-2023"},
+                    {model:"Mitsubishi Xpander",years:"2017-2023"}
+                ]
             },
             {
                 id:5,
@@ -549,7 +703,6 @@
                 desc:"Kampas rem belakang Brembo Prime Low-Met berkualitas. Performa pengereman stabil dengan minimal debu rem.",
                 price:165000,
                 oldPrice:190000,
-                // Gambar: Kampas rem belakang Brembo - BENAR sesuai produk
                 image:"https://www.brembostore.com/cdn/shop/files/PRIME_Low-Met_Rear_Disc_Brake_Pad_Set_-_P11024_14.jpg?v=1777203947&width=1600",
                 stock:20,
                 maxQty:8,
@@ -557,7 +710,17 @@
                 badge:"popular",
                 rating:4.5,
                 reviews:94,
-                cardType:"type-b"
+                cardType:"type-b",
+                cars:[
+                    {model:"Toyota Innova",years:"2004-2023"},
+                    {model:"Toyota Kijang",years:"1997-2004"},
+                    {model:"Daihatsu Gran Max",years:"2007-2023"},
+                    {model:"Suzuki Carry",years:"2005-2019"},
+                    {model:"Mitsubishi L300",years:"2007-2018"},
+                    {model:"Isuzu Panther",years:"1997-2021"},
+                    {model:"Nissan Serena",years:"2012-2020"},
+                    {model:"Mazda 8",years:"2010-2016"}
+                ]
             },
             {
                 id:6,
@@ -565,7 +728,6 @@
                 desc:"Aki maintenance free Yuasa YBX 3000 series 60Ah dengan daya starter kuat. Umur pakai panjang & garansi 12 bulan.",
                 price:850000,
                 oldPrice:950000,
-                // Gambar: Aki mobil Yuasa 60Ah - BENAR sesuai produk
                 image:"https://m.media-amazon.com/images/I/71i9PzFBiZL.jpg",
                 stock:8,
                 maxQty:5,
@@ -573,7 +735,17 @@
                 badge:"best",
                 rating:4.9,
                 reviews:312,
-                cardType:"type-c"
+                cardType:"type-c",
+                cars:[
+                    {model:"Toyota Fortuner",years:"2016-2023"},
+                    {model:"Toyota Innova Reborn",years:"2016-2023"},
+                    {model:"Honda CR-V Turbo",years:"2017-2022"},
+                    {model:"Mitsubishi Pajero Sport",years:"2016-2023"},
+                    {model:"Nissan Terra",years:"2018-2023"},
+                    {model:"Isuzu MU-X",years:"2013-2021"},
+                    {model:"Ford Everest",years:"2015-2023"},
+                    {model:"Chevrolet Trailblazer",years:"2012-2021"}
+                ]
             },
             {
                 id:7,
@@ -581,7 +753,6 @@
                 desc:"Busi iridium NGK IX series dengan pembakaran sempurna. Efisiensi bahan bakar optimal & tenaga mesin meningkat.",
                 price:75000,
                 oldPrice:85000,
-                // Gambar: Busi iridium NGK IX - BENAR sesuai produk
                 image:"https://ngksparkplugs.com/wp-content/uploads/2019/03/IX-Tip-Horizontal-768x424.png",
                 stock:56,
                 maxQty:12,
@@ -589,7 +760,17 @@
                 badge:"new",
                 rating:4.7,
                 reviews:203,
-                cardType:"type-b"
+                cardType:"type-b",
+                cars:[
+                    {model:"Toyota Yaris",years:"2006-2023"},
+                    {model:"Toyota Vios",years:"2003-2022"},
+                    {model:"Honda City",years:"2009-2020"},
+                    {model:"Honda Jazz",years:"2004-2020"},
+                    {model:"Suzuki Swift",years:"2005-2023"},
+                    {model:"Mazda 2",years:"2015-2023"},
+                    {model:"Nissan March",years:"2010-2022"},
+                    {model:"Daihatsu Sirion",years:"2007-2018"}
+                ]
             },
             {
                 id:8,
@@ -597,7 +778,6 @@
                 desc:"Lampu LED Philips Ultinon Access H4 super bright. Penerangan maksimal 6000K, hemat energi & tahan lama.",
                 price:325000,
                 oldPrice:380000,
-                // Gambar: Lampu LED Philips H4 - BENAR sesuai produk
                 image:"https://m.media-amazon.com/images/I/51++EesQgcL._AC_UF1000,1000_QL80_.jpg",
                 stock:12,
                 maxQty:6,
@@ -605,164 +785,544 @@
                 badge:"sale",
                 rating:4.6,
                 reviews:156,
-                cardType:"type-a"
+                cardType:"type-a",
+                cars:[
+                    {model:"Toyota Avanza",years:"2004-2023"},
+                    {model:"Toyota Kijang Innova",years:"2004-2015"},
+                    {model:"Daihatsu Xenia",years:"2004-2023"},
+                    {model:"Suzuki Ertiga",years:"2012-2023"},
+                    {model:"Honda Brio",years:"2012-2023"},
+                    {model:"Mitsubishi Mirage",years:"2013-2021"},
+                    {model:"Nissan Grand Livina",years:"2007-2019"},
+                    {model:"Daihatsu Ayla",years:"2013-2023"}
+                ]
+            },
+            {
+                id:9,
+                name:"Filter Udara Bosch",
+                desc:"Filter udara Bosch high performance dengan daya filtrasi optimal. Melindungi mesin dari debu dan partikel berbahaya.",
+                price:95000,
+                oldPrice:115000,
+                image:"https://s19531.pcdn.co/wp-content/uploads/2016/09/Bosch-HEPA-Cabin-Air-Filter.png",
+                stock:38,
+                maxQty:10,
+                category:"engine",
+                badge:"popular",
+                rating:4.8,
+                reviews:178,
+                cardType:"type-b",
+                cars:[
+                    {model:"Toyota Corolla Altis",years:"2008-2020"},
+                    {model:"Toyota Camry",years:"2006-2023"},
+                    {model:"Honda Accord",years:"2008-2015"},
+                    {model:"Honda Civic",years:"2006-2021"},
+                    {model:"Mazda 6",years:"2013-2021"},
+                    {model:"Hyundai Sonata",years:"2011-2014"},
+                    {model:"Kia Optima",years:"2011-2020"}
+                ]
+            },
+            {
+                id:10,
+                name:"Wiper Blade Bosch Aerotwin",
+                desc:"Wiper blade Bosch Aerotwin flat blade dengan teknologi aerodinamis. Membersihkan kaca optimal tanpa suara berisik.",
+                price:125000,
+                oldPrice:145000,
+                image:"https://cdn11.bigcommerce.com/s-fqaftp/images/stencil/1280x1280/products/17073/86927/jgs4x4-bosch-aerotwin-flat-blade-wiper-blade-set-600575mm-a955s__88891.1758627792.jpg?c=2",
+                stock:25,
+                maxQty:8,
+                category:"electrical",
+                badge:"new",
+                rating:4.7,
+                reviews:145,
+                cardType:"type-a",
+                cars:[
+                    {model:"Toyota Fortuner",years:"2016-2023"},
+                    {model:"Toyota Innova Reborn",years:"2016-2023"},
+                    {model:"Honda CR-V",years:"2017-2022"},
+                    {model:"Mitsubishi Pajero Sport",years:"2016-2023"},
+                    {model:"Nissan X-Trail",years:"2015-2023"},
+                    {model:"Mazda CX-5",years:"2012-2023"},
+                    {model:"Hyundai Tucson",years:"2016-2023"},
+                    {model:"Kia Sportage",years:"2016-2023"}
+                ]
             }
         ];
 
-        let cart=[],orderHistory=JSON.parse(localStorage.getItem('ap_history'))||[],selPay='',visitors=JSON.parse(localStorage.getItem('ap_visitors'))||[],currentOrder=null;
-
-        // Init
-        document.addEventListener('DOMContentLoaded',()=>{
-            renderProducts('all');updateCart();updateHistory();trackVisitor();initParticles();
-            document.getElementById('cDate').valueAsDate=new Date();
-        });
-
-        // Particles
-        function initParticles(){
-            const c=document.getElementById('particles');
-            for(let i=0;i<25;i++){
-                const p=document.createElement('div');p.className='particle';
-                p.style.left=Math.random()*100+'%';p.style.animationDelay=Math.random()*12+'s';
-                p.style.animationDuration=(8+Math.random()*8)+'s';c.appendChild(p);
+        let cart=[],orderHistory=JSON.parse(localStorage.getItem('ap_history'))||[],selPay='',currentOrder=null;
+        
+        // ===== VISITOR TRACKING SYSTEM =====
+        const VISITOR_KEY = 'ap_visitors_v2';
+        const SESSION_KEY = 'ap_session_id';
+        const ONLINE_TIMEOUT = 5 * 60 * 1000;
+        
+        function getVisitors() {
+            try {
+                return JSON.parse(localStorage.getItem(VISITOR_KEY)) || [];
+            } catch(e) {
+                return [];
             }
         }
-
-        // Filter Products
-        function filterProducts(category,el){
-            document.querySelectorAll('.filter-tag').forEach(t=>t.classList.remove('active'));
+        
+        function saveVisitors(visitors) {
+            localStorage.setItem(VISITOR_KEY, JSON.stringify(visitors));
+        }
+        
+        function getSessionId() {
+            let sid = sessionStorage.getItem(SESSION_KEY);
+            if (!sid) {
+                sid = 'SES-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+                sessionStorage.setItem(SESSION_KEY, sid);
+            }
+            return sid;
+        }
+        
+        function trackVisitor() {
+            const now = new Date().getTime();
+            const sessionId = getSessionId();
+            let visitors = getVisitors();
+            
+            const existingIndex = visitors.findIndex(v => v.sessionId === sessionId);
+            
+            const visitorData = {
+                sessionId: sessionId,
+                id: Date.now(),
+                time: new Date().toLocaleString('id-ID', {
+                    day: 'numeric', month: 'short', year: 'numeric',
+                    hour: '2-digit', minute: '2-digit', second: '2-digit'
+                }),
+                timestamp: now,
+                date: new Date().toDateString(),
+                userAgent: navigator.userAgent.slice(0, 50),
+                platform: navigator.platform,
+                language: navigator.language,
+                screenSize: window.screen.width + 'x' + window.screen.height,
+                isOnline: true
+            };
+            
+            if (existingIndex >= 0) {
+                visitors[existingIndex] = {
+                    ...visitors[existingIndex],
+                    ...visitorData,
+                    visitCount: (visitors[existingIndex].visitCount || 1) + 1,
+                    lastVisit: visitors[existingIndex].time
+                };
+            } else {
+                visitorData.visitCount = 1;
+                visitors.push(visitorData);
+            }
+            
+            if (visitors.length > 100) {
+                visitors = visitors.slice(-100);
+            }
+            
+            saveVisitors(visitors);
+            updateVisitorBadge();
+        }
+        
+        function updateVisitorOnlineStatus() {
+            let visitors = getVisitors();
+            const now = new Date().getTime();
+            const sessionId = getSessionId();
+            
+            visitors = visitors.map(v => {
+                if (v.sessionId === sessionId) {
+                    return { ...v, timestamp: now, isOnline: true };
+                }
+                const isStillOnline = (now - v.timestamp) < ONLINE_TIMEOUT;
+                return { ...v, isOnline: isStillOnline };
+            });
+            
+            saveVisitors(visitors);
+        }
+        
+        function getOnlineCount() {
+            const now = new Date().getTime();
+            return getVisitors().filter(v => (now - v.timestamp) < ONLINE_TIMEOUT).length;
+        }
+        
+        function updateVisitorBadge() {
+            const badge = document.getElementById('visitorBadge');
+            const count = getVisitors().length;
+            if (count > 0) {
+                badge.textContent = count;
+                badge.style.display = 'flex';
+            }
+        }
+        
+        function deleteVisitor(sessionId) {
+            if (!confirm('Hapus pengunjung ini dari riwayat?')) return;
+            let visitors = getVisitors().filter(v => v.sessionId !== sessionId);
+            saveVisitors(visitors);
+            refreshVisitors();
+            show('Pengunjung dihapus');
+        }
+        
+        function clearAllVisitors() {
+            if (!confirm('Hapus SEMUA riwayat pengunjung? Tindakan ini tidak dapat dibatalkan!')) return;
+            localStorage.removeItem(VISITOR_KEY);
+            refreshVisitors();
+            updateVisitorBadge();
+            show('Semua riwayat pengunjung dihapus');
+        }
+        
+        function refreshVisitors() {
+            updateVisitorOnlineStatus();
+            const visitors = getVisitors();
+            const today = new Date().toDateString();
+            
+            document.getElementById('vCount').textContent = visitors.length;
+            document.getElementById('vToday').textContent = visitors.filter(v => v.date === today).length;
+            document.getElementById('vOnline').textContent = getOnlineCount();
+            
+            const list = document.getElementById('vList');
+            if (!visitors.length) {
+                list.innerHTML = '<div class="v-empty"><i class="fas fa-users-slash"></i><p>Belum ada pengunjung</p></div>';
+                return;
+            }
+            
+            list.innerHTML = visitors.slice().reverse().map(v => {
+                const statusClass = v.isOnline ? 'status-online' : 'status-offline';
+                const statusText = v.isOnline ? 'Online' : 'Offline';
+                const visitInfo = v.visitCount > 1 ? '<span style="color:var(--gold)">(' + v.visitCount + 'x kunjungan)</span>' : '';
+                const lastVisit = v.lastVisit ? '<span style="color:var(--muted)">Kunjungan sebelumnya: ' + v.lastVisit + '</span>' : '';
+                
+                return '<div class="v-item">' +
+                    '<div class="v-item-info">' +
+                        '<span class="v-item-time"><i class="fas fa-clock"></i> ' + v.time + ' ' + visitInfo + '</span>' +
+                        '<span class="v-item-detail"><i class="fas fa-desktop"></i> ' + v.platform + ' | ' + v.screenSize + '</span>' +
+                        '<span class="v-item-detail"><i class="fas fa-globe"></i> ' + v.language + '</span>' +
+                        lastVisit +
+                    '</div>' +
+                    '<div style="display:flex;align-items:center;gap:8px">' +
+                        '<span class="v-item-status ' + statusClass + '">' + statusText + '</span>' +
+                        '<button class="v-del-btn" onclick="deleteVisitor(\'' + v.sessionId + '\')" title="Hapus"><i class="fas fa-trash"></i></button>' +
+                    '</div>' +
+                '</div>';
+            }).join('');
+        }
+        
+        function showVisitor() {
+            refreshVisitors();
+            document.getElementById('visitorModal').classList.add('active');
+            document.getElementById('overlay').classList.add('active');
+        }
+        
+        function closeVisitor() {
+            document.getElementById('visitorModal').classList.remove('active');
+            document.getElementById('overlay').classList.remove('active');
+        }
+        
+        // ===== LANDING PAGE =====
+        function enterSite() {
+            const landing = document.getElementById('landingPage');
+            landing.classList.add('hidden');
+            setTimeout(() => {
+                landing.style.display = 'none';
+                initScrollAnimations();
+            }, 1200);
+        }
+        
+        // ===== SCROLL ANIMATIONS =====
+        function initScrollAnimations() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+            
+            document.querySelectorAll('.slide-in, .slide-left, .slide-right, .scale-in').forEach(el => {
+                observer.observe(el);
+            });
+        }
+        
+        function smoothScroll(id) {
+            const el = document.getElementById(id);
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // ===== PARTICLES & SPEED LINES =====
+        function initParticles() {
+            const c = document.getElementById('particles');
+            for(let i = 0; i < 30; i++) {
+                const p = document.createElement('div');
+                p.className = 'particle';
+                p.style.left = Math.random() * 100 + '%';
+                p.style.animationDelay = Math.random() * 12 + 's';
+                p.style.animationDuration = (8 + Math.random() * 8) + 's';
+                p.style.width = (2 + Math.random() * 3) + 'px';
+                p.style.height = p.style.width;
+                c.appendChild(p);
+            }
+            
+            const sl = document.getElementById('speedLines');
+            for(let i = 0; i < 15; i++) {
+                const line = document.createElement('div');
+                line.className = 'speed-line';
+                line.style.left = Math.random() * 100 + '%';
+                line.style.animationDelay = Math.random() * 3 + 's';
+                line.style.animationDuration = (2 + Math.random() * 2) + 's';
+                line.style.height = (50 + Math.random() * 100) + 'px';
+                sl.appendChild(line);
+            }
+        }
+        
+        // ===== FILTER & RENDER PRODUCTS =====
+        function filterProducts(category, el) {
+            document.querySelectorAll('.filter-tag').forEach(t => t.classList.remove('active'));
             el.classList.add('active');
             renderProducts(category);
         }
-
-        // Render Products with Variations
-        function renderProducts(filter){
-            const grid=document.getElementById('productsGrid');
-            const filtered=filter==='all'?products:products.filter(p=>p.category===filter);
-            
-            grid.innerHTML=filtered.map(p=>{
-                const sc=p.stock>20?'stock-ok':p.stock>10?'stock-low':'stock-limited';
-                const st=p.stock>20?`Stok: ${p.stock}`:p.stock>10?`Stok Terbatas: ${p.stock}`:`Hampir Habis: ${p.stock}`;
-                const badgeClass={'best':'badge-best','new':'badge-new','sale':'badge-sale','popular':'badge-popular'}[p.badge]||'';
-                const badgeText={'best':'Best Seller','new':'Baru','sale':'Diskon','popular':'Populer'}[p.badge]||'';
-                const discount=p.oldPrice?Math.round((1-p.price/p.oldPrice)*100):0;
-                const stars='★'.repeat(Math.floor(p.rating))+(p.rating%1>=0.5?'½':'');
-                
-                return`<div class="product-card ${p.cardType}">
-                    <div class="card-badges">
-                        <span class="card-badge ${badgeClass}">${badgeText}</span>
-                        ${discount>0?`<span class="card-badge badge-sale">-${discount}%</span>`:''}
-                    </div>
-                    <img src="${p.image}" alt="${p.name}" class="product-image" onerror="this.src='https://placehold.co/400x300/1a1a1a/D4AF37?text=${encodeURIComponent(p.name)}'">
-                    <div class="product-info">
-                        <div class="product-name">${p.name}</div>
-                        <div class="product-rating">
-                            <span class="stars">${stars}</span>
-                            <span class="rating-count">(${p.rating}) · ${p.reviews} ulasan</span>
-                        </div>
-                        <div class="product-desc">${p.desc}</div>
-                        <span class="product-stock ${sc}"><i class="fas fa-box"></i> ${st}</span>
-                        <div class="product-price">
-                            Rp ${format(p.price)}
-                            ${p.oldPrice?`<span class="old-price">Rp ${format(p.oldPrice)}</span>`:''}
-                        </div>
-                        <div class="max-info"><i class="fas fa-info-circle"></i> Max: ${p.maxQty} item</div>
-                        <div class="quantity-control">
-                            <button class="qty-btn" onclick="updQty(${p.id},-1)"><i class="fas fa-minus"></i></button>
-                            <span class="qty-display" id="q-${p.id}">1</span>
-                            <button class="qty-btn" onclick="updQty(${p.id},1)"><i class="fas fa-plus"></i></button>
-                        </div>
-                        <button class="btn-add-cart" onclick="addCart(${p.id})"><i class="fas fa-cart-plus"></i> Masukkan Keranjang</button>
-                    </div>
-                </div>`;
-            }).join('');
-        }
-
-        function format(n){return n.toLocaleString('id-ID')}
-        function updQty(id,ch){const d=document.getElementById('q-'+id),p=products.find(x=>x.id===id);let q=parseInt(d.textContent)+ch;if(q<1)q=1;if(q>p.maxQty){show('Maksimal '+p.maxQty+' item!','err');q=p.maxQty}d.textContent=q}
         
-        function addCart(id){
-            const p=products.find(x=>x.id===id),q=parseInt(document.getElementById('q-'+id).textContent),ex=cart.find(x=>x.id===id);
-            if(ex){if(ex.qty+q>p.maxQty){show('Maksimal '+p.maxQty+' '+p.name,'err');return}ex.qty+=q}else{cart.push({...p,qty:q})}
-            updateCart();show(p.name+' ditambahkan!');document.getElementById('q-'+id).textContent='1';
-        }
-
-        function updateCart(){
-            const items=document.getElementById('cartItems'),badge=document.getElementById('cartBadge'),total=document.getElementById('cartTotal');
-            const n=cart.reduce((s,x)=>s+x.qty,0);badge.textContent=n;
-            if(!cart.length){items.innerHTML='<div class="empty"><i class="fas fa-shopping-basket"></i><p>Keranjang kosong</p></div>';total.style.display='none';return}
-            const t=cart.reduce((s,x)=>s+x.price*x.qty,0);
-            items.innerHTML=cart.map(x=>`<div class="cart-item"><img src="${x.image}" onerror="this.src='https://placehold.co/80x80/1a1a1a/D4AF37?text=${encodeURIComponent(x.name)}'"><div class="cart-item-info"><div class="cart-item-name">${x.name}</div><div class="cart-item-price">Rp ${format(x.price)}</div><div class="cart-item-qty">Jumlah: ${x.qty}</div></div><button class="remove-item" onclick="delCart(${x.id})"><i class="fas fa-trash"></i></button></div>`).join('');
-            document.getElementById('subtotal').textContent='Rp '+format(t);document.getElementById('totalPrice').textContent='Rp '+format(t);total.style.display='block';
-        }
-
-        function delCart(id){cart=cart.filter(x=>x.id!==id);updateCart();show('Dihapus dari keranjang')}
-        function toggleCart(){document.getElementById('cartSidebar').classList.toggle('active');document.getElementById('overlay').classList.toggle('active')}
-        function toggleHistory(){document.getElementById('historySidebar').classList.toggle('active');document.getElementById('overlay').classList.toggle('active')}
-        function closeAll(){document.querySelectorAll('.sidebar').forEach(s=>s.classList.remove('active'));document.getElementById('overlay').classList.remove('active')}
-
-        function openOrder(){
-            if(!cart.length){show('Keranjang kosong!','err');return}
-            const t=cart.reduce((s,x)=>s+x.price*x.qty,0);
-            document.getElementById('orderSumItems').innerHTML=cart.map(x=>`<div class="sum-item"><span>${x.name} (${x.qty}x)</span><span>Rp ${format(x.price*x.qty)}</span></div>`).join('');
-            document.getElementById('orderSumTotal').textContent='Rp '+format(t);closeAll();document.getElementById('orderModal').classList.add('active');
-        }
-
-        function closeOrder(){document.getElementById('orderModal').classList.remove('active');document.getElementById('orderForm').reset();selPay='';document.querySelectorAll('.pay-option').forEach(x=>x.classList.remove('selected'))}
-        function selectPay(m){selPay=m;document.querySelectorAll('.pay-option').forEach(x=>x.classList.remove('selected'));event.currentTarget.classList.add('selected')}
-
-        function submitOrder(e){
-            e.preventDefault();if(!selPay){show('Pilih metode pembayaran!','err');return}
-            const n=document.getElementById('cName').value,ph=document.getElementById('cPhone').value,c=document.getElementById('cCar').value,d=document.getElementById('cDate').value,tm=document.getElementById('cTime').value;
-            const tot=cart.reduce((s,x)=>s+x.price*x.qty,0);
-            const order={id:'ORD-'+Date.now(),name:n,phone:ph,car:c,date:d,time:tm,items:[...cart],total:tot,pay:selPay,created:new Date().toISOString()};
-            orderHistory.unshift(order);localStorage.setItem('ap_history',JSON.stringify(orderHistory));
+        function renderProducts(filter) {
+            const grid = document.getElementById('productsGrid');
+            const filtered = filter === 'all' ? products : products.filter(p => p.category === filter);
             
-            let msg=`*PESANAN AUTO PRO*%0A%0A*Data Pembeli:*%0ANama: ${n}%0AWA: ${ph}%0AMobil: ${c}%0ATanggal: ${d}%0AWaktu: ${tm}%0A%0A*Produk:*%0A`;
-            cart.forEach(x=>{msg+=`- ${x.name} (${x.qty}x) = Rp ${format(x.price*x.qty)}%0A`});
-            msg+=`%0A*Total: Rp ${format(tot)}*%0A*Bayar: ${payLabel(selPay)}*%0A%0A*Ambil di Toko*%0ATerima kasih sudah belanja di AUTO PRO!`;
+            grid.innerHTML = filtered.map((p, idx) => {
+                const sc = p.stock > 20 ? 'stock-ok' : p.stock > 10 ? 'stock-low' : 'stock-limited';
+                const st = p.stock > 20 ? 'Stok: ' + p.stock : p.stock > 10 ? 'Stok Terbatas: ' + p.stock : 'Hampir Habis: ' + p.stock;
+                const badgeClass = {'best':'badge-best','new':'badge-new','sale':'badge-sale','popular':'badge-popular'}[p.badge] || '';
+                const badgeText = {'best':'Best Seller','new':'Baru','sale':'Diskon','popular':'Populer'}[p.badge] || '';
+                const discount = p.oldPrice ? Math.round((1 - p.price/p.oldPrice) * 100) : 0;
+                const stars = '★'.repeat(Math.floor(p.rating)) + (p.rating % 1 >= 0.5 ? '½' : '');
+                
+                const carsHtml = p.cars.map(c => '<span>' + c.model + ' (' + c.years + ')</span>').join('');
+                
+                const animClass = idx % 2 === 0 ? 'slide-left' : 'slide-right';
+                const delay = 'delay-' + ((idx % 5) + 1);
+                
+                return '<div class="product-card ' + p.cardType + ' ' + animClass + ' ' + delay + '">' +
+                    '<div class="card-badges">' +
+                        '<span class="card-badge ' + badgeClass + '">' + badgeText + '</span>' +
+                        (discount > 0 ? '<span class="card-badge badge-sale">-' + discount + '%</span>' : '') +
+                    '</div>' +
+                    '<img src="' + p.image + '" alt="' + p.name + '" class="product-image" loading="lazy" onerror="this.onerror=null;this.src=\'https://placehold.co/400x300/1a1a1a/D4AF37?text=' + encodeURIComponent(p.name) + '\'">' +
+                    '<div class="product-info">' +
+                        '<div class="product-name">' + p.name + '</div>' +
+                        '<div class="product-rating">' +
+                            '<span class="stars">' + stars + '</span>' +
+                            '<span class="rating-count">(' + p.rating + ') · ' + p.reviews + ' ulasan</span>' +
+                        '</div>' +
+                        '<div class="product-desc">' + p.desc + '</div>' +
+                        '<div class="car-compat">' +
+                            '<div class="car-compat-title"><i class="fas fa-car"></i> Kompatibel dengan:</div>' +
+                            '<div class="car-compat-list">' + carsHtml + '</div>' +
+                        '</div>' +
+                        '<span class="product-stock ' + sc + '"><i class="fas fa-box"></i> ' + st + '</span>' +
+                        '<div class="product-price">' +
+                            'Rp ' + format(p.price) +
+                            (p.oldPrice ? '<span class="old-price">Rp ' + format(p.oldPrice) + '</span>' : '') +
+                        '</div>' +
+                        '<div class="max-info"><i class="fas fa-info-circle"></i> Max: ' + p.maxQty + ' item</div>' +
+                        '<div class="quantity-control">' +
+                            '<button class="qty-btn" onclick="updQty(' + p.id + ',-1)"><i class="fas fa-minus"></i></button>' +
+                            '<span class="qty-display" id="q-' + p.id + '">1</span>' +
+                            '<button class="qty-btn" onclick="updQty(' + p.id + ',1)"><i class="fas fa-plus"></i></button>' +
+                        '</div>' +
+                        '<button class="btn-add-cart" onclick="addCart(' + p.id + ')"><i class="fas fa-cart-plus"></i> Masukkan Keranjang</button>' +
+                    '</div>' +
+                '</div>';
+            }).join('');
             
-            currentOrder={msg,phone:'6285854678904'};cart=[];updateCart();updateHistory();closeOrder();showTY();
+            setTimeout(() => {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) entry.target.classList.add('visible');
+                    });
+                }, { threshold: 0.1 });
+                document.querySelectorAll('.product-card').forEach(el => observer.observe(el));
+            }, 100);
         }
-
-        function payLabel(m){return{transfer:'Transfer Bank',dana:'DANA',cash:'Cash'}[m]||m}
-
-        function showTY(){
+        
+        function format(n) { return n.toLocaleString('id-ID') }
+        
+        function updQty(id, ch) {
+            const d = document.getElementById('q-' + id);
+            const p = products.find(x => x.id === id);
+            let q = parseInt(d.textContent) + ch;
+            if (q < 1) q = 1;
+            if (q > p.maxQty) { show('Maksimal ' + p.maxQty + ' item!', 'err'); q = p.maxQty }
+            d.textContent = q;
+        }
+        
+        function addCart(id) {
+            const p = products.find(x => x.id === id);
+            const q = parseInt(document.getElementById('q-' + id).textContent);
+            const ex = cart.find(x => x.id === id);
+            if (ex) {
+                if (ex.qty + q > p.maxQty) { show('Maksimal ' + p.maxQty + ' ' + p.name, 'err'); return }
+                ex.qty += q;
+            } else {
+                cart.push({ ...p, qty: q });
+            }
+            updateCart();
+            show(p.name + ' ditambahkan!');
+            document.getElementById('q-' + id).textContent = '1';
+        }
+        
+        function updateCart() {
+            const items = document.getElementById('cartItems');
+            const badge = document.getElementById('cartBadge');
+            const total = document.getElementById('cartTotal');
+            const n = cart.reduce((s, x) => s + x.qty, 0);
+            badge.textContent = n;
+            if (!cart.length) {
+                items.innerHTML = '<div class="empty"><i class="fas fa-shopping-basket"></i><p>Keranjang kosong</p></div>';
+                total.style.display = 'none';
+                return;
+            }
+            const t = cart.reduce((s, x) => s + x.price * x.qty, 0);
+            items.innerHTML = cart.map(x => '<div class="cart-item"><img src="' + x.image + '" loading="lazy" onerror="this.onerror=null;this.src=\'https://placehold.co/80x80/1a1a1a/D4AF37?text=' + encodeURIComponent(x.name) + '\'"><div class="cart-item-info"><div class="cart-item-name">' + x.name + '</div><div class="cart-item-price">Rp ' + format(x.price) + '</div><div class="cart-item-qty">Jumlah: ' + x.qty + '</div></div><button class="remove-item" onclick="delCart(' + x.id + ')"><i class="fas fa-trash"></i></button></div>').join('');
+            document.getElementById('subtotal').textContent = 'Rp ' + format(t);
+            document.getElementById('totalPrice').textContent = 'Rp ' + format(t);
+            total.style.display = 'block';
+        }
+        
+        function delCart(id) { cart = cart.filter(x => x.id !== id); updateCart(); show('Dihapus dari keranjang') }
+        function toggleCart() { document.getElementById('cartSidebar').classList.toggle('active'); document.getElementById('overlay').classList.toggle('active') }
+        function toggleHistory() { document.getElementById('historySidebar').classList.toggle('active'); document.getElementById('overlay').classList.toggle('active') }
+        function closeAll() {
+            document.querySelectorAll('.sidebar').forEach(s => s.classList.remove('active'));
+            document.getElementById('overlay').classList.remove('active');
+            document.getElementById('orderModal').classList.remove('active');
+            document.getElementById('visitorModal').classList.remove('active');
+        }
+        
+        function openOrder() {
+            if (!cart.length) { show('Keranjang kosong!', 'err'); return }
+            const t = cart.reduce((s, x) => s + x.price * x.qty, 0);
+            document.getElementById('orderSumItems').innerHTML = cart.map(x => '<div class="sum-item"><span>' + x.name + ' (' + x.qty + 'x)</span><span>Rp ' + format(x.price * x.qty) + '</span></div>').join('');
+            document.getElementById('orderSumTotal').textContent = 'Rp ' + format(t);
+            closeAll();
+            document.getElementById('orderModal').classList.add('active');
+        }
+        
+        function closeOrder() {
+            document.getElementById('orderModal').classList.remove('active');
+            document.getElementById('orderForm').reset();
+            selPay = '';
+            document.querySelectorAll('.pay-option').forEach(x => x.classList.remove('selected'));
+        }
+        
+        function selectPay(m) {
+            selPay = m;
+            document.querySelectorAll('.pay-option').forEach(x => x.classList.remove('selected'));
+            event.currentTarget.classList.add('selected');
+        }
+        
+        function submitOrder(e) {
+            e.preventDefault();
+            if (!selPay) { show('Pilih metode pembayaran!', 'err'); return }
+            const n = document.getElementById('cName').value;
+            const ph = document.getElementById('cPhone').value;
+            const c = document.getElementById('cCar').value;
+            const d = document.getElementById('cDate').value;
+            const tm = document.getElementById('cTime').value;
+            const tot = cart.reduce((s, x) => s + x.price * x.qty, 0);
+            
+            const order = {
+                id: 'ORD-' + Date.now(),
+                name: n, phone: ph, car: c, date: d, time: tm,
+                items: [...cart], total: tot, pay: selPay,
+                created: new Date().toISOString()
+            };
+            orderHistory.unshift(order);
+            localStorage.setItem('ap_history', JSON.stringify(orderHistory));
+            
+            let msg = '*PESANAN AUTO PRO*%0A%0A*Data Pembeli:*%0ANama: ' + n + '%0AWA: ' + ph + '%0AMobil: ' + c + '%0ATanggal: ' + d + '%0AWaktu: ' + tm + '%0A%0A*Produk:*%0A';
+            cart.forEach(x => { msg += '- ' + x.name + ' (' + x.qty + 'x) = Rp ' + format(x.price * x.qty) + '%0A' });
+            msg += '%0A*Total: Rp ' + format(tot) + '*%0A*Bayar: ' + payLabel(selPay) + '*%0A%0A*Ambil di Toko*%0ATerima kasih sudah belanja di AUTO PRO!';
+            
+            currentOrder = { msg, phone: '6285854678904' };
+            cart = [];
+            updateCart();
+            updateHistory();
+            closeOrder();
+            showTY();
+        }
+        
+        function payLabel(m) { return { transfer: 'Transfer Bank', dana: 'DANA', cash: 'Cash' }[m] || m }
+        
+        function showTY() {
             document.getElementById('tyModal').classList.add('active');
-            setTimeout(()=>{if(currentOrder)window.open(`https://wa.me/${currentOrder.phone}?text=${currentOrder.msg}`,'_blank')},2500);
+            setTimeout(() => {
+                if (currentOrder) window.open('https://wa.me/' + currentOrder.phone + '?text=' + currentOrder.msg, '_blank');
+            }, 2500);
         }
-        function closeTY(){document.getElementById('tyModal').classList.remove('active');if(currentOrder)window.open(`https://wa.me/${currentOrder.phone}?text=${currentOrder.msg}`,'_blank');currentOrder=null}
-
-        function updateHistory(){
-            const el=document.getElementById('historyItems'),btn=document.getElementById('deleteAllBtn');
-            if(!orderHistory.length){el.innerHTML='<div class="empty"><i class="fas fa-clipboard-list"></i><p>Belum ada riwayat</p></div>';btn.style.display='none';return}
-            btn.style.display='block';
-            el.innerHTML=orderHistory.map(o=>`<div class="history-item"><button class="del-btn" onclick="delHistory('${o.id}')"><i class="fas fa-times"></i></button><div class="history-header"><span class="history-id">${o.id}</span><span class="history-date">${fmtDate(o.created)}</span></div><div>${o.items.map(i=>`<div class="history-product">• ${i.name} (${i.qty}x)</div>`).join('')}</div><div class="history-total">Rp ${format(o.total)}</div><div style="font-size:11px;color:var(--muted);margin-top:5px"><i class="fas fa-car"></i> ${o.car} | <i class="fas fa-credit-card"></i> ${payLabel(o.pay)}</div></div>`).join('');
+        
+        function closeTY() {
+            document.getElementById('tyModal').classList.remove('active');
+            if (currentOrder) window.open('https://wa.me/' + currentOrder.phone + '?text=' + currentOrder.msg, '_blank');
+            currentOrder = null;
         }
-
-        function delHistory(id){if(confirm('Hapus riwayat ini?')){orderHistory=orderHistory.filter(x=>x.id!==id);localStorage.setItem('ap_history',JSON.stringify(orderHistory));updateHistory();show('Riwayat dihapus')}}
-        function deleteAllHistory(){if(confirm('Hapus SEMUA riwayat?')){orderHistory=[];localStorage.setItem('ap_history',JSON.stringify(orderHistory));updateHistory();show('Semua riwayat dihapus')}}
-        function fmtDate(d){return new Date(d).toLocaleDateString('id-ID',{day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'})}
-
-        function trackVisitor(){
-            const now=new Date(),v={id:Date.now(),time:now.toLocaleString('id-ID'),date:now.toDateString(),user:navigator.userAgent.slice(0,30)};
-            if(!visitors.some(x=>x.date===now.toDateString()&&Math.abs(now-x.id)<3600000)){visitors.push(v);if(visitors.length>50)visitors=visitors.slice(-50);localStorage.setItem('ap_visitors',JSON.stringify(visitors))}
+        
+        function updateHistory() {
+            const el = document.getElementById('historyItems');
+            const btn = document.getElementById('deleteAllBtn');
+            if (!orderHistory.length) {
+                el.innerHTML = '<div class="empty"><i class="fas fa-clipboard-list"></i><p>Belum ada riwayat</p></div>';
+                btn.style.display = 'none';
+                return;
+            }
+            btn.style.display = 'block';
+            el.innerHTML = orderHistory.map(o => '<div class="history-item"><button class="del-btn" onclick="delHistory(\'' + o.id + '\')"><i class="fas fa-times"></i></button><div class="history-header"><span class="history-id">' + o.id + '</span><span class="history-date">' + fmtDate(o.created) + '</span></div><div>' + o.items.map(i => '<div class="history-product">• ' + i.name + ' (' + i.qty + 'x)</div>').join('') + '</div><div class="history-total">Rp ' + format(o.total) + '</div><div style="font-size:11px;color:var(--muted);margin-top:5px"><i class="fas fa-car"></i> ' + o.car + ' | <i class="fas fa-credit-card"></i> ' + payLabel(o.pay) + '</div></div>').join('');
         }
-
-        function showVisitor(){
-            const t=new Date().toDateString();
-            document.getElementById('vCount').textContent=visitors.length;
-            document.getElementById('vToday').textContent=visitors.filter(x=>x.date===t).length;
-            document.getElementById('vList').innerHTML=visitors.slice().reverse().map(x=>`<div class="v-item"><span>${x.time}</span><span><i class="fas fa-user"></i> Pengunjung</span></div>`).join('');
-            document.getElementById('visitorModal').classList.add('active');document.getElementById('overlay').classList.add('active');
+        
+        function delHistory(id) {
+            if (confirm('Hapus riwayat ini?')) {
+                orderHistory = orderHistory.filter(x => x.id !== id);
+                localStorage.setItem('ap_history', JSON.stringify(orderHistory));
+                updateHistory();
+                show('Riwayat dihapus');
+            }
         }
-        function closeVisitor(){document.getElementById('visitorModal').classList.remove('active');document.getElementById('overlay').classList.remove('active')}
-
-        function show(msg,type='ok'){
-            const n=document.getElementById('notif');n.textContent=msg;
-            if(type==='err'){n.style.background='linear-gradient(135deg,#ff6b35 0%,#ff8c5a 100%)';n.classList.add('error');}
-            else{n.style.background='linear-gradient(135deg,var(--gold) 0%,#B8941F 100%)';n.classList.remove('error');}
-            n.classList.add('show');setTimeout(()=>n.classList.remove('show'),2500);
+        
+        function deleteAllHistory() {
+            if (confirm('Hapus SEMUA riwayat pemesanan?')) {
+                orderHistory = [];
+                localStorage.setItem('ap_history', JSON.stringify(orderHistory));
+                updateHistory();
+                show('Semua riwayat dihapus');
+            }
         }
+        
+        function fmtDate(d) {
+            return new Date(d).toLocaleDateString('id-ID', {
+                day: 'numeric', month: 'short', year: 'numeric',
+                hour: '2-digit', minute: '2-digit'
+            });
+        }
+        
+        function show(msg, type) {
+            const n = document.getElementById('notif');
+            n.textContent = msg;
+            if (type === 'err') {
+                n.style.background = 'linear-gradient(135deg,#ff6b35 0%,#ff8c5a 100%)';
+                n.classList.add('error');
+            } else {
+                n.style.background = 'linear-gradient(135deg,var(--gold) 0%,#B8941F 100%)';
+                n.classList.remove('error');
+            }
+            n.classList.add('show');
+            setTimeout(() => n.classList.remove('show'), 2500);
+        }
+        
+        // ===== INIT =====
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts('all');
+            updateCart();
+            updateHistory();
+            trackVisitor();
+            updateVisitorOnlineStatus();
+            initParticles();
+            updateVisitorBadge();
+            document.getElementById('cDate').valueAsDate = new Date();
+        });
+        
+        window.addEventListener('beforeunload', () => {
+            updateVisitorOnlineStatus();
+        });
     </script>
 </body>
 </html>
